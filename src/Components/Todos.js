@@ -7,10 +7,11 @@ const Todos = (props) => {
      <h3 className='text-center'>
         The Todo List
         </h3> 
-        {
-            props.todos.map((todo) => {
-               return <Todo todo={todo} />
-            })
+        { props.todos.length ? 
+            props.todos.map((todo, index) => {
+               return <Todo todo={todo} key={index} deleteTodo={props.deleteTodo} />
+            }) : 
+            <p> No todos to display </p>
         }
       
     </div>

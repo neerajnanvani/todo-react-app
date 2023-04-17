@@ -1,33 +1,44 @@
-import "./App.css";
+import AddTodo from "./Components/AddTodo";
 import Footer from "./Components/Footer";
-
 import Header from "./Components/Header";
 import Todos from "./Components/Todos";
 
+import { useState } from 'react';
 
 
 function App() {
-  let todoList = [
+  const [todoList, setTodoList] = useState([
     {
-      sno: 1,
       title: "Go to office",
       desc: "Leave The house and go to office"
     },
     {
-      sno: 2,
       title: "Go to Lunck",
       desc: "Leave The seat and go to canteen" 
     }, 
     {
-      sno: 3,
       title: "Go to Home",
       desc: "Leave The office and go to home"
     }
-  ]
+  ]);
+
+  const deleteTodo = (todo) => {
+    console.log(todo);
+
+    setTodoList(todoList.filter((temp) => temp.sno !== todo.sno ));
+  }
+
+  const addTodo = (title, desc) => {
+    console.log(title, desc)
+
+    setTodoList([...todoList, {title, desc}])
+  }
+  
   return (
     <>
       <Header title="This is A Todo app" />
-      <Todos todos={todoList} />
+      <AddTodo addTodo={addTodo} />
+      <Todos todos={todoList} deleteTodo={deleteTodo} />
       <Footer />
     </>
   );
